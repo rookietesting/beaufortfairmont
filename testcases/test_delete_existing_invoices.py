@@ -5,14 +5,16 @@ from utilities.util import Utils
 
 @pytest.mark.usefixtures("setup")
 class TestExistingInvoices():
-    def test_Existing_Invoices(self):
-        utils = Utils()
-        invoicepage = InvoicePage(self.driver)
-        launchpage = LaunchPage(self.driver)
 
-        launchpage.getInvoices()
-        numberOfInvoicesStart = invoicepage.getNumberOfInvoices()
-        invoicepage.deleteSelectedInvoice(1)
-        numberOfInvoicesEnd = invoicepage.getNumberOfInvoices()
+    @pytest.fixture(autouse=True)
+    def class_setup(self):
+        self.invoicepage = InvoicePage(self.driver)
+        self.launchpage = LaunchPage(self.driver)
+        self.utils = Utils()
 
-        utils.assertAfterDelete(numberOfInvoicesStart,numberOfInvoicesEnd)
+    def test_Delete_Existing_Invoices(self):
+        self.launchpage.getInvoices()
+        numberOfInvoicesStart = self.invoicepage.getNumberOfInvoices()
+        self.invoicepage.deleteSelectedInvoice(1)
+        numberOfInvoicesEnd = self.invoicepage.getNumberOfInvoices()
+        self.utils.assertInvoicesAfterDelete(numberOfInvoicesStart,numberOfInvoicesEnd)

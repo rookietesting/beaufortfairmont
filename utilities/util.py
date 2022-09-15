@@ -1,5 +1,6 @@
-
-
 class Utils:
-    def assertAfterDelete(self,startValue,endValue):
+    def assertInvoicesAfterDelete(self,startValue,endValue):
         assert startValue > endValue
+
+    def asserMenuStateOpen(self,state):
+        assert state == "open"
