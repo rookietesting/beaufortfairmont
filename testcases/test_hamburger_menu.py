@@ -6,4 +6,4 @@ from pages.beaufortfairmont_launch_page import LaunchPage
 class TestHamburgerMenu():
     def test_hamburger_Menu(self):
         hamburgerpage = LaunchPage(self.driver)
-        hamburgerpage.hamburgerMenuOpen()
+        hamburgerpage.clickMenuIcon()
